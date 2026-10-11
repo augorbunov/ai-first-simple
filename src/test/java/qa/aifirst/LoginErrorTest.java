@@ -11,6 +11,9 @@ class LoginErrorTest extends TestBase {
 
     private static final String PAGE = "https://augorbunov.github.io/ai-first-simple/index.html";
     private static final String ERROR = "Неверное имя пользователя или пароль";
+    private static final String EMPTY_USERNAME = "Введите имя пользователя";
+    private static final String EMPTY_PASSWORD = "Введите пароль";
+    private static final String EMPTY_BOTH = "Введите имя пользователя и пароль";
 
     @Test
     @DisplayName("Неверная пара логин/пароль показывает сообщение об ошибке")
@@ -28,7 +31,7 @@ class LoginErrorTest extends TestBase {
         open(PAGE);
         $("#password").setValue("admin123");
         $("button[type=submit]").click();
-        $("#message").shouldHave(text(ERROR));
+        $("#message").shouldHave(text(EMPTY_USERNAME));
     }
 
     @Test
@@ -37,7 +40,7 @@ class LoginErrorTest extends TestBase {
         open(PAGE);
         $("#username").setValue("admin");
         $("button[type=submit]").click();
-        $("#message").shouldHave(text(ERROR));
+        $("#message").shouldHave(text(EMPTY_PASSWORD));
     }
 
     @Test
@@ -45,6 +48,6 @@ class LoginErrorTest extends TestBase {
     void emptyUsernameAndPasswordShowError() {
         open(PAGE);
         $("button[type=submit]").click();
-        $("#message").shouldHave(text(ERROR));
+        $("#message").shouldHave(text(EMPTY_BOTH));
     }
 }
